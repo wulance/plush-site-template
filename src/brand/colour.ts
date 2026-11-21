@@ -18,11 +18,11 @@ function mix(a: string, b: string, share: number) {
 }
 
 /**
- * What goes with a brand's accent colour: the text that reads on it (the darker or the lighter of the
- * two given, whichever contrasts more) and the accent under the pointer, shifted away from that text
+ * What goes with a brand's accent colour: the text that reads on it (of the colours given, the one that
+ * contrasts most; the first wins a tie) and the accent under the pointer, shifted away from that text
  * so a pressed button reads at least as well as a resting one.
  */
-export function accentPair(accent: string, dark: string, light: string) {
-  const on = contrast(accent, dark) >= contrast(accent, light) ? dark : light;
-  return { on, hover: mix(accent, on === dark ? "#ffffff" : "#000000", 0.14) };
+export function accentPair(accent: string, texts: string[]) {
+  const on = texts.reduce((best, text) => (contrast(accent, text) > contrast(accent, best) ? text : best));
+  return { on, hover: mix(accent, luminance(on) < luminance(accent) ? "#ffffff" : "#000000", 0.14) };
 }

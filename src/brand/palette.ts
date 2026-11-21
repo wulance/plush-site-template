@@ -2,7 +2,8 @@ import type { CSSProperties } from "react";
 import brand from "@brand";
 import { accentPair } from "./colour";
 
-const accent = accentPair(brand.colors.accent, brand.colors.stage, "#ffffff");
+// A light palette has dark ink and a dark one has light ink, so one of these reads on any accent.
+const accent = accentPair(brand.colors.accent, ["#ffffff", brand.colors.stage, brand.colors.ink]);
 
 /** The brand's colours as CSS variables, set on <html> over the defaults in globals.css. */
 export const palette = {
