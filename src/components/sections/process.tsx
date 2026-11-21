@@ -18,7 +18,7 @@ export function Process({ locale, dict }: { locale: Locale; dict: Dictionary }) 
   ];
 
   return (
-    <section id="process" className="scroll-mt-24 py-10">
+    <section id="process" className="py-10">
       <div className="lit border-y border-line bg-cool/60 py-14 md:py-20">
         <div className="shell">
           <div className="reveal">

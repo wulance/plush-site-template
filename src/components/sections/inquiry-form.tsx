@@ -116,7 +116,7 @@ export function InquiryForm({ endpoint, email, products, labels }: Props) {
   }
 
   return (
-    <form id="inquiry" onSubmit={submit} noValidate className="grid scroll-mt-28 gap-4 sm:grid-cols-2">
+    <form id="inquiry" onSubmit={submit} noValidate className="grid scroll-mt-10 gap-4 sm:grid-cols-2">
       <label className="grid content-start gap-1.5">
         <span className="label">{labels.name} *</span>
         <input name="name" autoComplete="name" required {...invalid("name")} className="field" />

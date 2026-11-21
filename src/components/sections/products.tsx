@@ -35,7 +35,7 @@ export function Products({ locale, dict }: { locale: Locale; dict: Dictionary })
   });
 
   return (
-    <section id="products" className="shell scroll-mt-24 py-20 md:py-28">
+    <section id="products" className="shell py-20 md:py-28">
       <div className="reveal mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">
           <p className="eyebrow mb-4">{t.eyebrow}</p>

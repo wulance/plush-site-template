@@ -50,8 +50,12 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    /* A section jumped to lands under the header, which is 4.5rem tall on a phone and 6rem from a tablet up. */
+    scroll-padding-top: 4.5rem;
     -webkit-text-size-adjust: 100%;
+  }
+  @media (min-width: 48rem) {
+    html { scroll-padding-top: 6rem; }
   }
   body {
     /* Rotating and tilted decorations must never widen the page. */

@@ -26,7 +26,7 @@ export function Design({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const story = brand.caseStudy;
 
   return (
-    <section id="design" className="shell scroll-mt-24 py-20 md:py-28">
+    <section id="design" className="shell py-20 md:py-28">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="reveal lg:col-span-5 lg:pt-4">
           <p className="eyebrow mb-4">{t.eyebrow}</p>

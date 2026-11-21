@@ -21,7 +21,7 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
   ].filter((detail) => detail.value);
 
   return (
-    <section id="contact" className="shell scroll-mt-24 py-20 md:py-28">
+    <section id="contact" className="shell py-20 md:py-28">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
         <div className="reveal lg:col-span-5">
           <p className="eyebrow mb-4">{t.eyebrow}</p>

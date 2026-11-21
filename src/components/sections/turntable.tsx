@@ -178,7 +178,7 @@ export function Turntable({ frames, first, alt, labels: t }: Props) {
 
   if (still) {
     return (
-      <section id="turntable" ref={track} className="scroll-mt-24 px-2 py-10 md:px-3">
+      <section id="turntable" ref={track} className="px-2 py-10 md:px-3">
         <div className="craft-panel rounded-lg py-10 md:py-14">
           <div className="shell flex items-start justify-between gap-6">
             {heading}

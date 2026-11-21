@@ -10,7 +10,7 @@ export function Proof({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   if (!photos.length && !clients.length) return null;
 
   return (
-    <section id="factory" className="shell scroll-mt-24 py-16 md:py-24">
+    <section id="factory" className="shell py-16 md:py-24">
       {photos.length > 0 && (
         <>
           <div className="reveal mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
