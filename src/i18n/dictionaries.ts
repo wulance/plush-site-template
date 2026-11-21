@@ -103,7 +103,6 @@ const en = {
     subject: "Plush inquiry",
   },
   footer: { rights: "All rights reserved.", top: "Back to top" },
-  notFound: { title: "This page is not here.", back: "Back to the home page" },
 };
 
 export type Dictionary = typeof en;
@@ -207,7 +206,6 @@ const zh: Dictionary = {
     subject: "毛绒玩具询盘",
   },
   footer: { rights: "版权所有。", top: "回到顶部" },
-  notFound: { title: "没有找到这个页面", back: "回到首页" },
 };
 
 const dictionaries: Record<Locale, Dictionary> = { en, zh };
