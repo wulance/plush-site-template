@@ -153,7 +153,7 @@ const brand: BrandConfig = {
     },
   ],
 
-  turntable: { frames: "/images/turntable", count: 32, width: 600, height: 600 },
+  turntable: { frames: "/images/turntable", count: 32, width: 640, height: 555 },
 
   inquiryEndpoint: process.env.NEXT_PUBLIC_INQUIRY_ENDPOINT ?? "",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
