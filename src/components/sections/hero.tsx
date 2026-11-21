@@ -12,17 +12,16 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const zh = locale === "zh";
   const [plain, emphasis] = [t.lines.slice(0, -1).filter(Boolean).join(" "), t.lines[t.lines.length - 1]];
 
-  const items: StageItem[] = brand.products
-    .filter((product) => product.onStage)
-    .map((product) => ({
-      id: product.id,
-      name: product.name[locale],
-      code: product.code,
-      category: brand.categories.find((c) => c.id === product.category)?.name[locale] ?? "",
-      details: product.details.map((detail) => detail[locale]),
-      light: product.light,
-      image: asset(product.image),
-    }));
+  const staged = brand.products.filter((product) => product.onStage);
+  const items: StageItem[] = (staged.length ? staged : brand.products).map((product) => ({
+    id: product.id,
+    name: product.name[locale],
+    code: product.code,
+    category: brand.categories.find((c) => c.id === product.category)?.name[locale] ?? "",
+    details: product.details.map((detail) => detail[locale]),
+    light: product.light,
+    image: asset(product.image),
+  }));
 
   const meta = [t.meta[0], t.meta[1], t.meta[2] + " " + brand.facts.founded];
 
@@ -56,7 +55,9 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         </h1>
 
         <div className="relative z-10 -mt-[4vw] flex flex-1 flex-col md:-mt-[2vw]">
-          <HeroStage items={items} labels={{ prev: t.prev, next: t.next, view: t.view, squeeze: t.squeeze }} />
+          {items.length > 0 && (
+            <HeroStage items={items} labels={{ prev: t.prev, next: t.next, view: t.view, squeeze: t.squeeze }} />
+          )}
         </div>
 
         <div className="shell relative z-20 mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">

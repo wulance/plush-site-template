@@ -18,7 +18,7 @@ export interface Product {
   material: Localized;
   /** Two or three short selling points. */
   details: Localized[];
-  /** Whether the toy stands in the lineup on the first screen. */
+  /** Whether the toy stands in the lineup on the first screen. When no product sets it, all of them do. */
   onStage?: boolean;
 }
 
