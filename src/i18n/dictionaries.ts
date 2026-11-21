@@ -31,7 +31,7 @@ const en = {
       { side: "Front", title: "A face that stays put", body: "Eyes, cheeks and smile are placed from a template, so piece 5,000 looks at you the way the approved sample did." },
       { side: "Side", title: "A shape that holds", body: "Stuffing is weighed for each part. The belly stays round, the arms stay soft, and the toy sits without leaning." },
       { side: "Back", title: "Seams you cannot find", body: "The closing seam is ladder-stitched by hand and hidden in the pile. Plates and tails are sewn into the seam, not onto it." },
-      { side: "Three-quarter", title: "Ready for the shelf", body: "Brushed, checked under a needle detector, tagged and packed. What turns here is what arrives." },
+      { side: "Full circle", title: "Ready for the shelf", body: "Brushed, checked under a needle detector, tagged and packed. What turns here is what arrives." },
     ],
   },
   design: {
@@ -134,7 +134,7 @@ const zh: Dictionary = {
       { side: "正面", title: "表情不走样", body: "眼睛、腮红和嘴巴按模板定位，第 5000 只和确认样的神态一致。" },
       { side: "侧面", title: "形体立得住", body: "每个部位的充棉都称重。肚子圆润，手臂柔软，坐着不歪。" },
       { side: "背面", title: "找不到的收口", body: "收口用手工藏针缝合，藏在绒毛里。背鳍和尾巴车在缝里，不是贴在面上。" },
-      { side: "斜侧", title: "可以上架了", body: "梳毛、过检针机、挂牌、装袋。这里转给你看的，就是你收到的。" },
+      { side: "转满一圈", title: "可以上架了", body: "梳毛、过检针机、挂牌、装袋。这里转给你看的，就是你收到的。" },
     ],
   },
   design: {

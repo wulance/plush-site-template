@@ -34,7 +34,7 @@ function NoteItem({ p, index, total, children }: { p: MotionValue<number>; index
 
 /**
  * A design shown from every side. The page pins while scrolling turns the toy on the spot, and each
- * side it reaches brings up what was decided there. It rests on the last side until the page moves on.
+ * side it reaches brings up what was decided there. The last stretch brings it round to the front again.
  */
 export function Turntable({ frames, size, labels: t }: Props) {
   const track = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ export function Turntable({ frames, size, labels: t }: Props) {
   const turn = useTransform(
     p,
     [...SIDES.map((_, i) => (i ? i + 0.5 : 0) / total), 1],
-    [...SIDES, SIDES[SIDES.length - 1]].map((angle) => angle / 360),
+    [...SIDES, 360].map((angle) => angle / 360),
   );
   const degrees = useTransform(turn, (v) => String(Math.round(v * 360)).padStart(3, "0") + "°");
   const dial = useTransform(turn, [0, 1], [0, 360]);
