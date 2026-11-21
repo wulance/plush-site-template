@@ -38,7 +38,7 @@ export function InquiryForm({ endpoint, email, products, labels }: Props) {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.currentTarget)) as Record<string, string>;
-    if (!data.name?.trim() || !data.email?.trim() || !data.message?.trim()) {
+    if (!event.currentTarget.checkValidity() || !data.name.trim() || !data.message.trim()) {
       setStatus("invalid");
       return;
     }
