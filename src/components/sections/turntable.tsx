@@ -26,9 +26,10 @@ const ANGLES = [0, 40, 130, 265, 360];
 
 /** Which note an angle belongs to: front, side, back, and the way round to the front again. */
 function noteAt(turns: number, total: number) {
-  if (turns >= 1) return total - 1;
   const angle = (((turns % 1) + 1) % 1) * 360;
-  return Math.min(total - 1, angle < 45 ? 0 : angle < 135 ? 1 : angle < 270 ? 2 : 3);
+  // The scroll ends one full turn round, facing front again: that view is the last note's, until the toy is turned on past it.
+  if (angle < 45) return turns >= 1 && turns < 1.125 ? total - 1 : 0;
+  return Math.min(total - 1, angle < 135 ? 1 : angle < 270 ? 2 : 3);
 }
 
 /**
