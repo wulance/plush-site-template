@@ -2,6 +2,7 @@ import brand from "@brand";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Logo } from "@/components/ui/logo";
+import { asset } from "@/lib/asset";
 import { sectionLinks } from "./site-header";
 
 const link = "inline-flex min-h-11 items-center underline-offset-4 hover:underline md:min-h-8";
@@ -56,7 +57,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
         </p>
         {brand.legal.registration && <p>{brand.legal.registration[locale]}</p>}
         {brand.legal.links.map((item) => (
-          <a key={item.href} href={item.href} className={link}>
+          <a key={item.href} href={asset(item.href)} className={link}>
             {item.label[locale]}
           </a>
         ))}
