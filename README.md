@@ -86,4 +86,11 @@ Work down this list; nothing else names the company.
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | The public address, such as `https://www.example.com`. Needed for link previews and search engines; see step 5 |
 | `NEXT_PUBLIC_INQUIRY_ENDPOINT` | Where the inquiry form posts JSON. Left empty, the form asks the visitor's mail app to open with the inquiry filled in, and shows the text to copy in case no mail app answers |
-| `NEXT_PUBLIC_BASE_PATH` | Set when the site is served from a sub-folder |
+| `NEXT_PUBLIC_BASE_PATH` | The sub-folder the site is served from, such as `/catalogue`. Leave unset when it has a domain to itself |
+
+## Publishing
+
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds every push to `main` and publishes it to
+GitHub Pages at `https://<owner>.github.io/<repository>/`, setting the two addresses above to match. Turn Pages
+on once under Settings → Pages → Source: GitHub Actions. For a domain of its own, change
+`NEXT_PUBLIC_SITE_URL` in the workflow and drop `NEXT_PUBLIC_BASE_PATH`.

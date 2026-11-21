@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     description: dict.meta.description,
     icons: brand.logo ? { icon: asset(brand.logo) } : undefined,
     alternates: brand.siteUrl
-      ? { canonical: "/" + locale + "/", languages: Object.fromEntries(locales.map((l) => [htmlLang[l], "/" + l + "/"])) }
+      ? { canonical: asset("/" + locale + "/"), languages: Object.fromEntries(locales.map((l) => [htmlLang[l], asset("/" + l + "/")])) }
       : undefined,
     openGraph: { title, description: dict.meta.description, locale: htmlLang[locale], type: "website", siteName: brand.name[locale], images },
     twitter: { card: images ? "summary_large_image" : "summary", title, description: dict.meta.description, images },
