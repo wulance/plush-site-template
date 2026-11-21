@@ -46,7 +46,7 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
           </dl>
         </div>
 
-        <div className="reveal rounded-[2rem] bg-stage-deep p-6 md:rounded-[2.75rem] md:p-10 lg:col-span-7">
+        <div className="reveal rounded-lg border border-line bg-stage-deep/55 p-6 md:p-10 lg:col-span-7">
           <InquiryForm
             endpoint={brand.inquiryEndpoint}
             email={c.email}

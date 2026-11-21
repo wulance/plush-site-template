@@ -47,17 +47,17 @@ export function ProductGrid({ products, categories, labels }: Props) {
         ))}
       </div>
 
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((product) => (
           <li
             key={product.id}
             style={{ "--light": product.light } as CSSProperties}
-            className="group relative isolate flex animate-rise flex-col overflow-hidden rounded-card bg-stage-deep"
+            className="catalog-card group relative isolate flex animate-rise flex-col overflow-hidden rounded-card"
           >
-            <div className="relative aspect-[4/3.6]">
+            <div className="catalog-image relative m-2 aspect-[4/3.6] rounded-sm">
               <div
                 aria-hidden
-                className="absolute inset-x-0 bottom-0 h-2/3 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-40 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
+                className="absolute inset-x-0 bottom-0 h-1/2 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-15 blur-2xl"
               />
               <img
                 src={product.image}
@@ -65,7 +65,7 @@ export function ProductGrid({ products, categories, labels }: Props) {
                 loading="lazy"
                 className="toy absolute inset-0 size-full object-contain object-bottom px-8 pt-8 transition-transform duration-700 ease-plush group-hover:scale-[1.06]"
               />
-              <span className="note absolute top-5 left-5 text-[color:var(--light)]">{product.code}</span>
+              <span className="note absolute top-5 left-5 text-ink-soft">{product.code}</span>
             </div>
             <div className="flex flex-1 flex-col p-6 pt-5">
               <h3 className="display text-[1.75rem]">{product.name}</h3>

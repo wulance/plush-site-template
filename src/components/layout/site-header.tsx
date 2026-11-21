@@ -15,8 +15,8 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
   ];
 
   return (
-    <header className="sticky top-2 z-30 px-2 pt-2 md:top-3 md:px-3 md:pt-3">
-      <div className="mx-auto flex h-16 max-w-[85rem] items-center justify-between gap-4 rounded-full bg-stage/85 pr-2.5 pl-4 shadow-[0_14px_34px_-18px_rgb(0_0_0/0.8)] ring-1 ring-ink/10 backdrop-blur-xl md:gap-6 md:pl-6">
+    <header className="sticky top-0 z-30 border-b border-line bg-stage/95 backdrop-blur-xl">
+      <div className="shell flex h-20 items-center justify-between gap-4 md:h-24 md:gap-6">
         <a href="#top" aria-label={dict.footer.top}>
           <Logo locale={locale} />
         </a>

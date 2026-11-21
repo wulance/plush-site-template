@@ -30,9 +30,9 @@ export function SketchToToy({ designs, labels }: { designs: SketchDesign[]; labe
 
   return (
     <div style={{ "--light": design.light, "--split": split + "%" } as CSSProperties}>
-      <div className="stage-light relative isolate aspect-square overflow-hidden rounded-[2rem] bg-stage-deep select-none md:rounded-[2.75rem]">
+      <div className="comparison-panel stage-light relative isolate aspect-square overflow-hidden rounded-lg border border-line bg-stage-deep select-none">
         {/* The finished toy, standing in its own light. */}
-        <div aria-hidden className="stage-light absolute inset-x-0 bottom-0 h-1/2 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-55 blur-2xl" />
+        <div aria-hidden className="stage-light absolute inset-x-0 bottom-0 h-1/2 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-20 blur-2xl" />
         <img key={design.image} src={design.image} alt={design.name} draggable={false} className="toy absolute inset-0 size-full animate-rise object-contain p-[7%]" />
 
         {/* The drawing lies over it, up to the dividing line. */}
@@ -48,8 +48,8 @@ export function SketchToToy({ designs, labels }: { designs: SketchDesign[]; labe
         </span>
 
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-[var(--split)] w-0">
-          <div className="stitch-y absolute inset-y-0 -left-px text-stage" />
-          <div className="absolute top-1/2 left-0 grid size-12 -translate-1/2 place-items-center rounded-full bg-accent text-white shadow-[0_8px_24px_-6px_rgb(0_0_0/0.6)]">
+          <div className="stitch-y absolute inset-y-0 -left-px text-ink/35" />
+          <div className="absolute top-1/2 left-0 grid size-12 -translate-1/2 place-items-center rounded-full bg-accent text-white shadow-[0_8px_24px_-6px_rgb(0_0_0/0.16)]">
             <svg viewBox="0 0 20 20" fill="none" className="size-5">
               <path d="m7 5-4 5 4 5M13 5l4 5-4 5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

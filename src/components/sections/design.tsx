@@ -29,7 +29,7 @@ export function Design({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 <div>
                   <h3 className="text-lg font-semibold">
                     {step.title}
-                    {i === 2 && <span className="note ml-3 rounded-full bg-warm px-2 py-1 align-middle text-stage">{t.sampleIn(brand.facts.sampleDays)}</span>}
+                    {i === 2 && <span className="note ml-3 rounded-full bg-warm px-2 py-1 align-middle text-ink">{t.sampleIn(brand.facts.sampleDays)}</span>}
                   </h3>
                   <p className="mt-1 text-[0.9375rem] leading-snug text-ink-soft">{step.body}</p>
                 </div>
