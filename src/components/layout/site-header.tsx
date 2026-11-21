@@ -24,7 +24,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
     <header className="sticky top-0 z-30 border-b border-line bg-stage/95 backdrop-blur-xl">
       <div className="shell relative flex h-18 items-center justify-between gap-3 md:h-24 md:gap-6">
         {/* The link is named by the brand it shows; it leads to the top of the page. */}
-        <a href="#top" className="rounded-full">
+        <a href="#top" className="inline-flex min-h-11 items-center">
           <Logo locale={locale} />
         </a>
 
