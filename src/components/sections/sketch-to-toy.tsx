@@ -83,7 +83,7 @@ export function SketchToToy({ designs, labels }: { designs: SketchDesign[]; labe
             <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-[#f6efdf]">
               <img src={item.sketch} alt="" className="size-full object-contain p-1 mix-blend-multiply" />
             </span>
-            <span className="min-w-0 max-sm:hidden">
+            <span className="min-w-0 max-sm:sr-only">
               <span className="note block opacity-60">{item.code}</span>
               <span className="block truncate text-sm font-semibold">{item.name}</span>
             </span>
