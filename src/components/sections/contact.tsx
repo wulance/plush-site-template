@@ -21,8 +21,8 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
   const { subject, name, company, email, product, custom, quantity, message, messageHint, send, sending, sent, mail, failed, required } = t;
 
   return (
-    <section id="contact" className="shell py-20 md:py-28">
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
+    <section id="contact" className="contact-section py-20 md:py-28">
+      <div className="shell grid gap-12 lg:grid-cols-12 lg:gap-14">
         <div className="reveal lg:col-span-5">
           <p className="eyebrow mb-4">{t.eyebrow}</p>
           <h2 className="display text-[clamp(2.5rem,5vw,4.25rem)]">{t.title}</h2>
@@ -46,7 +46,7 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
           </dl>
         </div>
 
-        <div className="reveal rounded-[2rem] bg-stage-deep p-6 md:rounded-[2.75rem] md:p-10 lg:col-span-7">
+        <div className="inquiry-panel reveal rounded-[1.25rem] bg-stage p-6 md:p-10 lg:col-span-7">
           <InquiryForm
             endpoint={brand.inquiryEndpoint}
             email={c.email}

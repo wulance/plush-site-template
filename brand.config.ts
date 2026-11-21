@@ -13,14 +13,14 @@ const brand: BrandConfig = {
   logo: "/brand/logo.svg",
 
   colors: {
-    stage: "#0d0b0a",
-    stageDeep: "#1a1614",
-    ink: "#f7eedd",
-    inkSoft: "#a79c90",
-    accent: "#ff4a1c",
-    accentDeep: "#e03a10",
-    warm: "#ffd046",
-    cool: "#a9d8f5",
+    stage: "#f7f5eb",
+    stageDeep: "#eeebe1",
+    ink: "#242123",
+    inkSoft: "#625d60",
+    accent: "#fa6247",
+    accentDeep: "#dd482e",
+    warm: "#e5f353",
+    cool: "#c7b6f4",
   },
 
   contact: {

@@ -10,7 +10,7 @@ export function Logo({ locale }: { locale: Locale }) {
       {brand.logo ? (
         <img src={asset(brand.logo)} alt="" width={36} height={36} className="size-9" />
       ) : (
-        <span aria-hidden className="display grid size-9 place-items-center rounded-full bg-accent text-lg text-white">
+        <span aria-hidden className="display grid size-9 place-items-center rounded-full bg-accent text-lg text-ink">
           {Array.from(name)[0]}
         </span>
       )}

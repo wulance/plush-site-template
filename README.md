@@ -7,7 +7,7 @@ is modelled and rendered by a script in this repository.
 
 ## What is on the page
 
-1. **Stage**: a dark stage with a spotlit line-up of toys that steps through the range.
+1. **Stage**: a colourful collector card that steps through the range, with arrows, selectors and a squeezable toy.
 2. **Turntable**: a toy that turns through 360° as the page scrolls, with a note for each side.
 3. **Sketch to toy**: a divider dragged across a design drawing and the finished toy.
 4. **Range**: product cards with a category filter.

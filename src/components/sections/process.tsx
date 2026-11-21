@@ -16,8 +16,8 @@ export function Process({ dict }: { dict: Dictionary }) {
   ];
 
   return (
-    <section id="process" className="px-2 py-10 md:px-3">
-      <div className="lit rounded-[2rem] bg-cool py-14 md:rounded-[2.75rem] md:py-20">
+    <section id="process" className="process-section">
+      <div className="lit bg-warm py-14 md:py-20">
         <div className="shell">
           <div className="reveal">
             <p className="eyebrow mb-4">{t.eyebrow}</p>

@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 import { Arrow } from "./arrow";
 
 const variants = {
-  primary: "bg-accent text-white hover:bg-accent-deep",
+  primary: "bg-accent text-ink hover:bg-accent-deep",
   ink: "bg-ink text-stage hover:bg-ink/85",
   ghost: "text-ink ring-1 ring-inset ring-ink/25 hover:ring-ink/60",
 };
@@ -18,7 +18,7 @@ type Size = keyof typeof sizes;
 
 export function buttonClass(variant: Variant = "ink", size: Size = "md", className?: string) {
   return cn(
-    "group/btn inline-flex shrink-0 cursor-pointer items-center justify-center gap-2.5 rounded-full font-medium whitespace-nowrap transition-colors duration-300",
+    "pop-button group/btn inline-flex shrink-0 cursor-pointer items-center justify-center gap-2.5 rounded-full font-semibold whitespace-nowrap transition-colors duration-300",
     variants[variant],
     sizes[size],
     className,

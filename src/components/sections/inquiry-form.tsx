@@ -111,7 +111,7 @@ export function InquiryForm({ endpoint, email, products, labels }: Props) {
       </label>
 
       <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-        <button type="submit" disabled={status === "sending"} className={buttonClass("primary", "lg", "disabled:opacity-60")}>
+        <button type="submit" disabled={status === "sending"} className={buttonClass("ink", "lg", "disabled:opacity-60")}>
           {status === "sending" ? labels.sending : labels.send}
           <Arrow className="transition-transform duration-300 ease-soft group-hover/btn:translate-x-1" />
         </button>

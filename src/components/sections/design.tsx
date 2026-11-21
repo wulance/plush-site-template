@@ -15,7 +15,7 @@ export function Design({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   if (!designs.length) return null;
 
   return (
-    <section id="design" className="shell py-20 md:py-28">
+    <section id="design" className="design-section shell py-20 md:py-28">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="reveal lg:col-span-5 lg:pt-4">
           <p className="eyebrow mb-4">{t.eyebrow}</p>
@@ -29,7 +29,7 @@ export function Design({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 <div>
                   <h3 className="text-lg font-semibold">
                     {step.title}
-                    {i === 2 && <span className="note ml-3 rounded-full bg-warm px-2 py-1 align-middle text-stage">{t.sampleIn(brand.facts.sampleDays)}</span>}
+                    {i === 2 && <span className="note ml-3 rounded-full bg-warm px-2 py-1 align-middle text-ink">{t.sampleIn(brand.facts.sampleDays)}</span>}
                   </h3>
                   <p className="mt-1 text-[0.9375rem] leading-snug text-ink-soft">{step.body}</p>
                 </div>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* A dark studio: "stage" is the unlit floor, "ink" the light on it, "accent" the one brand colour.
+  /* Palette defaults; the pop edition's configured paper, ink and saturated accent colours
      These are fallbacks; the values in brand.config.ts are set on <html> and win. */
   --color-stage: #0d0b0a;
   --color-stage-deep: #1a1614;
@@ -13,7 +13,7 @@
   --color-cool: #a9d8f5;
   --color-line: color-mix(in srgb, var(--color-ink) 16%, transparent);
 
-  --font-display: "Fraunces Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", serif;
+  --font-display: "Instrument Sans Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   --font-sans: "Instrument Sans Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
   --font-mono: "DM Mono", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", ui-monospace, "SFMono-Regular", monospace;
 
@@ -33,11 +33,8 @@
   }
 }
 
-/* A lit surface (warm, cool, paper): what stands on it is drawn in the dark of the stage. */
+/* Bright panels share the configured ink colour with the rest of the pop edition. */
 @utility lit {
-  --color-ink: var(--color-stage);
-  --color-ink-soft: color-mix(in srgb, var(--color-stage) 62%, transparent);
-  --color-line: color-mix(in srgb, var(--color-stage) 18%, transparent);
   color: var(--color-ink);
 }
 
@@ -77,19 +74,18 @@
 }
 
 @layer components {
-  /* Display type: Fraunces at its heaviest and softest, so the letters look stuffed. */
+  /* Heavy, tightly set sans type gives the pop edition its poster-like voice. */
   .display {
     font-family: var(--font-display);
-    font-weight: 900;
-    font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
-    letter-spacing: -0.045em;
-    line-height: 0.92;
+    font-weight: 800;
+    letter-spacing: -0.065em;
+    line-height: 0.98;
     text-wrap: balance;
     white-space: pre-line;
   }
   .display em {
-    font-style: italic;
-    font-weight: 900;
+    font-style: normal;
+    font-weight: 800;
     color: var(--em, var(--color-accent));
   }
   /* Chinese display type is a heavy gothic: no italics, looser leading, no negative tracking. */
@@ -162,7 +158,7 @@
 @layer utilities {
   /* A cut-out toy standing on the page: a soft contact shadow, no outline. */
   .toy {
-    filter: drop-shadow(0 1.1rem 1rem rgb(0 0 0 / 0.5));
+    filter: drop-shadow(0 1rem 0.7rem rgb(36 33 35 / 0.15));
   }
 
   .stage-light {
@@ -172,7 +168,7 @@
   /* A running stitch: used wherever the page needs a rule. */
   .stitch {
     height: 2px;
-    background: repeating-linear-gradient(90deg, currentColor 0 0.6rem, transparent 0.6rem 1.05rem);
+    background: currentColor;
     border-radius: 2px;
   }
   .stitch-y {
@@ -244,5 +240,108 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Pop edition: flat, saturated collector cards and big typographic gestures. All palette
+   values still come from brand.config.ts, including the product-specific display colours. */
+@layer components {
+  .pop-button { border: 1.5px solid var(--color-ink); }
+  .pop-button:hover { transform: translateY(-2px); }
+  .eyebrow { display: flex; align-items: center; gap: 0.7rem; color: var(--color-ink); }
+  .eyebrow::before { content: ""; width: 0.55rem; height: 0.55rem; background: var(--color-accent); border-radius: 50%; }
+  .hero-meta { padding-block: 1.5rem; }
+  .hero-layout { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 2.5rem; padding-bottom: 3rem; }
+  .hero-copy { display: flex; flex-direction: column; position: relative; padding-block: 1.8rem 1rem; }
+  .hero-title { font-size: clamp(5.4rem, 8.4vw, 8.5rem); position: relative; z-index: 1; }
+  .hero-title > span, .hero-title > em { display: block; }
+  .hero-title em { max-width: 5em; }
+  .hero-intro { margin-top: auto; padding-top: 3rem; }
+  .hero-spark { width: 5.7rem; height: 5.7rem; color: var(--color-ink); position: absolute; right: 0; top: 52%; transform: rotate(15deg); }
+  .collector-card { min-width: 0; border: 1.5px solid var(--color-ink); border-radius: 1.25rem; overflow: hidden; background: var(--color-cool); }
+  .collector-art { height: 25rem; position: relative; overflow: hidden; }
+  .collector-halo { position: absolute; width: 72%; aspect-ratio: 1; border-radius: 50%; background: var(--color-warm); left: 14%; top: 7%; }
+  .collector-edition { position: absolute; left: 1.5rem; right: 1.5rem; top: 1.3rem; display: flex; justify-content: space-between; gap: 1rem; z-index: 2; }
+  .collector-number { position: absolute; bottom: -1.5rem; left: 0.5rem; font-size: 15rem; font-weight: 800; letter-spacing: -0.12em; line-height: 1; color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--color-ink) 20%, transparent); }
+  .collector-toy { position: absolute; inset: 8% 15% 9%; cursor: pointer; transition: opacity 0.45s; -webkit-tap-highlight-color: transparent; }
+  .squeeze-tag { position: absolute; right: 1.25rem; top: 25%; background: var(--color-stage); padding: 0.6rem 0.8rem; border: 1.5px solid var(--color-ink); transform: rotate(12deg); z-index: 2; }
+  .collector-pips { position: absolute; bottom: 0.8rem; right: 1.2rem; display: flex; z-index: 2; }
+  .collector-pips button { width: 1.65rem; height: 1.65rem; display: grid; place-items: center; cursor: pointer; }
+  .collector-pips span { width: 0.45rem; height: 0.45rem; border: 1px solid var(--color-ink); border-radius: 50%; }
+  .collector-pips [aria-current] span { background: var(--color-ink); }
+  .collector-info { display: flex; justify-content: space-between; gap: 1rem; border-top: 1.5px solid var(--color-ink); padding: 1.4rem 1.5rem; background: var(--color-stage); }
+  .collector-name { font-size: clamp(1.75rem, 2.6vw, 2.65rem); }
+  .collector-details { line-height: 1.5; color: var(--color-ink-soft); }
+  .collector-arrows { display: flex; gap: 0.5rem; align-self: flex-start; }
+  .collector-arrows button { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 1.5px solid var(--color-ink); border-radius: 50%; cursor: pointer; }
+  .collector-arrows button:hover { background: var(--color-warm); }
+  .pop-marquee { border-block: 1.5px solid var(--color-ink); }
+  .pop-marquee .display { font-weight: 700; letter-spacing: -0.04em; }
+  .marquee-spark { font-size: 2rem; color: var(--color-accent); }
+  .turntable-orbit { width: min(54vw, 37rem); aspect-ratio: 1; position: absolute; top: 26%; left: 50%; transform: translateX(-50%); border: 1px solid var(--color-ink); border-radius: 50%; opacity: 0.2; }
+  .turntable-orbit::after { content: ""; position: absolute; inset: -2rem; border: inherit; border-radius: inherit; }
+  .turntable-panel > .display { color: color-mix(in srgb, var(--color-ink) 10%, transparent); }
+  .turntable-panel .eyebrow, .turntable-panel .note, .turntable-panel li p { color: var(--color-ink); }
+  .turntable-panel .eyebrow::before { background: var(--color-ink); }
+  .turntable-section { border-bottom: 1.5px solid var(--color-ink); }
+  .turntable-toy canvas, .turntable-toy img { transform-origin: bottom center; }
+  @media (min-width: 1024px) {
+    .turntable-toy canvas, .turntable-toy img { transform: scale(1.15); }
+  }
+  .design-section { border-bottom: 1px solid var(--color-line); }
+  .design-section ol li > .note { font-size: 1.1rem; font-family: var(--font-display); font-weight: 700; }
+  .comparison-art { border: 1.5px solid var(--color-ink); }
+  .comparison-art + [role="group"] button { border-radius: 0.75rem; }
+  .range-card { border: 1.5px solid var(--color-ink); border-radius: 1rem; background: var(--color-stage); }
+  .range-art { background: color-mix(in srgb, var(--light) 45%, var(--color-stage)); border-bottom: 1.5px solid var(--color-ink); overflow: hidden; }
+  .range-disc { position: absolute; inset: 14% 14% -4%; border: 1px solid color-mix(in srgb, var(--color-ink) 20%, transparent); border-radius: 50% 50% 0 0; }
+  .range-card:nth-child(even) .range-disc { border-radius: 50%; inset: 15%; background: color-mix(in srgb, var(--color-stage) 30%, transparent); border: 0; }
+  .range-card h3 { letter-spacing: -0.045em; }
+  .range-card a { width: 100%; justify-content: space-between; padding-top: 0.5rem; }
+  .products-section [aria-pressed="true"] { background: var(--color-ink); color: var(--color-stage); }
+  .process-section { border-block: 1.5px solid var(--color-ink); }
+  .process-section .eyebrow::before { background: var(--color-ink); }
+  .process-section ol .note { width: 3rem; height: 3rem; font-size: 1.1rem; background: transparent; border: 1.5px solid var(--color-ink); color: var(--color-ink); }
+  .contact-section { background: var(--color-cool); border-bottom: 1.5px solid var(--color-ink); }
+  .inquiry-panel { border: 1.5px solid var(--color-ink); box-shadow: 0.5rem 0.5rem 0 var(--color-ink); }
+  .field { border: 1px solid var(--color-ink); border-radius: 0.4rem; background: transparent; }
+  .field:focus { box-shadow: 3px 3px 0 var(--color-cool); }
+  .inquiry-panel .pop-button { background: var(--color-ink); color: var(--color-stage); }
+  footer .stitch { display: none; }
+  footer { padding-top: 0 !important; }
+  :lang(zh-CN) .hero-title { font-size: clamp(4.5rem, 7.5vw, 7.6rem); line-height: 1.13; }
+  @media (min-width: 1440px) { .hero-spark { top: 55%; } }
+  @media (max-width: 1023px) {
+    .hero-layout { gap: 1.5rem; grid-template-columns: 1fr 1fr; }
+    .hero-title { font-size: clamp(4.25rem, 8.8vw, 6rem); }
+    .hero-spark { display: none; }
+    .collector-art { height: 23rem; }
+    .collector-info { padding: 1rem; flex-wrap: wrap; }
+    .collector-arrows { margin-left: auto; }
+  }
+  @media (max-width: 639px) {
+    .site-header .shell { height: 4.5rem; }
+    .hero-meta { padding-block: 1.2rem; font-size: 0.625rem; }
+    .hero-layout { display: flex; flex-direction: column; gap: 1.75rem; padding-bottom: 2rem; }
+    .hero-copy { padding: 0.5rem 0 0; }
+    .hero-title { font-size: clamp(4.5rem, 19vw, 7rem); max-width: 100%; }
+    .hero-title > span { white-space: nowrap; }
+    .hero-title em { max-width: none; }
+    .hero-intro { padding-top: 1.5rem; }
+    .hero-intro .pop-button { padding-inline: 1.2rem; height: 3.2rem; font-size: 0.875rem; }
+    .collector-art { height: 21rem; }
+    .collector-toy { inset: 9% 12% 7%; }
+    .collector-edition { left: 1rem; right: 1rem; top: 1rem; font-size: 0.6rem; }
+    .squeeze-tag { right: 0.9rem; font-size: 0.625rem; }
+    .collector-name { font-size: 1.8rem; }
+    .collector-info { flex-wrap: nowrap; }
+    .collector-arrows { gap: 0.3rem; }
+    .collector-arrows button { width: 2rem; height: 2rem; }
+    .collector-details { font-size: 0.8125rem; }
+    .turntable-orbit { width: 85vw; top: 32%; }
+    .contact-section dd { overflow-wrap: anywhere; }
+    .inquiry-panel { box-shadow: 0.3rem 0.3rem 0 var(--color-ink); }
+    :lang(zh-CN) .hero-title { font-size: clamp(4rem, 18vw, 6rem); }
+    :lang(zh-CN) .hero-title > span, :lang(zh-CN) .hero-title em { display: inline; }
   }
 }

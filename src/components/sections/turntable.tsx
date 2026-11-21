@@ -88,22 +88,22 @@ export function Turntable({ frames, size, labels: t }: Props) {
   useMotionValueEvent(turn, "change", draw);
 
   return (
-    <section id="turntable" ref={track} className="relative h-[380svh]">
-      <div className="sticky top-0 h-svh p-2 pt-24 md:p-3 md:pt-28">
-        <div className="relative isolate flex h-full flex-col overflow-hidden rounded-[2rem] bg-accent text-white md:rounded-[2.75rem]">
-          <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_60%_at_50%_45%,transparent,rgb(0_0_0/0.55))]" />
+    <section id="turntable" ref={track} className="turntable-section relative h-[260svh] bg-accent">
+      <div className="sticky top-0 h-svh pt-24 md:pt-28">
+        <div className="turntable-panel relative isolate flex h-full flex-col overflow-hidden text-ink">
+          <div aria-hidden className="turntable-orbit" />
           <motion.p
             aria-hidden
             lang="en"
             style={{ x: drift }}
-            className="display absolute inset-x-0 top-1/2 -z-10 -translate-y-[58%] text-center text-[min(34vw,62svh)] leading-none whitespace-nowrap text-white/15"
+            className="display absolute inset-x-0 top-1/2 -z-10 -translate-y-[58%] text-center text-[min(34vw,62svh)] leading-none whitespace-nowrap text-ink/10"
           >
             {t.backdrop}
           </motion.p>
 
           <div className="shell flex items-start justify-between gap-6 pt-7 md:pt-10">
             <div>
-              <p className="eyebrow mb-3 !text-white/75 [@media(max-height:30rem)]:hidden">{t.eyebrow}</p>
+              <p className="eyebrow mb-3 [@media(max-height:30rem)]:hidden">{t.eyebrow}</p>
               <h2 className="display text-[clamp(1.75rem,min(4.4vw,6.5svh),4rem)]">{t.title}</h2>
             </div>
             <div className="note flex items-center gap-3 pt-1">
@@ -125,16 +125,16 @@ export function Turntable({ frames, size, labels: t }: Props) {
                     {String(i + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {note.side}
                   </span>
                   <h3 className="display mt-2 text-[clamp(1.75rem,min(3.6vw,5.5svh),3.5rem)] lg:mt-4">{note.title}</h3>
-                  <p className="mt-2 max-w-sm leading-snug font-medium text-white/90 lg:mt-4 lg:text-xl">{note.body}</p>
+                  <p className="mt-2 max-w-sm leading-snug font-medium text-ink lg:mt-4 lg:text-xl">{note.body}</p>
                 </NoteItem>
               ))}
             </ol>
-            <div className="relative min-h-0 lg:col-span-4" role="img" aria-label={t.alt}>
+            <div className="turntable-toy relative min-h-0 lg:col-span-6" role="img" aria-label={t.alt}>
               {/* The first frame is a plain image, so there is a toy before any script runs. */}
               {!drawn && <img src={frames[0]} alt="" loading="lazy" className="absolute inset-0 size-full object-contain object-bottom" />}
               <canvas ref={canvas} width={size.width} height={size.height} className="absolute inset-0 size-full object-contain object-bottom" />
             </div>
-            <p className="note self-end text-white/75 max-lg:hidden lg:col-span-4 lg:text-right">{t.caption}</p>
+            <p className="note self-end text-ink max-lg:hidden lg:col-span-2 lg:text-right">{t.caption}</p>
           </div>
         </div>
       </div>

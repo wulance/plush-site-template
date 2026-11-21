@@ -52,20 +52,17 @@ export function ProductGrid({ products, categories, labels }: Props) {
           <li
             key={product.id}
             style={{ "--light": product.light } as CSSProperties}
-            className="group relative isolate flex animate-rise flex-col overflow-hidden rounded-card bg-stage-deep"
+            className="range-card group relative isolate flex animate-rise flex-col overflow-hidden rounded-card"
           >
-            <div className="relative aspect-[4/3.6]">
-              <div
-                aria-hidden
-                className="absolute inset-x-0 bottom-0 h-2/3 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-40 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
-              />
+            <div className="range-art relative aspect-[4/3.6]">
+              <div aria-hidden className="range-disc" />
               <img
                 src={product.image}
                 alt={product.name}
                 loading="lazy"
                 className="toy absolute inset-0 size-full object-contain object-bottom px-8 pt-8 transition-transform duration-700 ease-plush group-hover:scale-[1.06]"
               />
-              <span className="note absolute top-5 left-5 text-[color:var(--light)]">{product.code}</span>
+              <span className="note absolute top-5 left-5">{product.code}</span>
             </div>
             <div className="flex flex-1 flex-col p-6 pt-5">
               <h3 className="display text-[1.75rem]">{product.name}</h3>
