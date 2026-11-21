@@ -138,7 +138,7 @@ export function Turntable({ frames, first, alt, labels: t }: Props) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerEnd}
       onPointerCancel={onPointerEnd}
-      className="relative size-full cursor-grab touch-pan-y rounded-3xl select-none active:cursor-grabbing has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-on-accent"
+      className="relative size-full cursor-grab touch-pan-y rounded-lg select-none active:cursor-grabbing has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-accent"
     >
       {/* The first frame is a plain picture, so there is a toy before any script runs. */}
       {!drawn && <img {...first} alt="" loading="lazy" draggable={false} className="absolute inset-0 size-full object-contain object-bottom" />}
@@ -178,7 +178,7 @@ export function Turntable({ frames, first, alt, labels: t }: Props) {
   if (still) {
     return (
       <section id="turntable" ref={track} className="scroll-mt-24 px-2 py-10 md:px-3">
-        <div className="on-accent rounded-[2rem] py-10 md:rounded-[2.75rem] md:py-14">
+        <div className="craft-panel rounded-lg py-10 md:py-14">
           <div className="shell flex items-start justify-between gap-6">
             {heading}
             {readout}
@@ -190,7 +190,7 @@ export function Turntable({ frames, first, alt, labels: t }: Props) {
                 <li key={note.title} className="border-t border-line pt-4">
                   <span className="note">{note.side}</span>
                   <h3 className="title mt-2 text-2xl">{note.title}</h3>
-                  <p className="mt-2 leading-snug font-medium">{note.body}</p>
+                  <p className="mt-2 leading-normal">{note.body}</p>
                 </li>
               ))}
             </ol>
@@ -204,12 +204,13 @@ export function Turntable({ frames, first, alt, labels: t }: Props) {
   return (
     <section id="turntable" ref={track} className="relative h-[380svh]">
       <div className="sticky top-0 h-svh p-2 pt-24 md:p-3 md:pt-28">
-        <div className="on-accent relative isolate flex h-full flex-col overflow-hidden rounded-[2rem] md:rounded-[2.75rem]">
+        <div className="craft-panel relative isolate flex h-full flex-col overflow-hidden rounded-lg">
+          <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_55%_65%_at_55%_45%,rgb(255_255_255/0.55),transparent)]" />
           <motion.p
             aria-hidden
             lang="en"
             style={{ x: drift }}
-            className="display absolute inset-x-0 top-1/2 -z-10 -translate-y-[58%] text-center text-[min(34vw,62svh)] leading-none whitespace-nowrap text-white/15"
+            className="display absolute inset-x-0 top-1/2 -z-10 -translate-y-[58%] text-center text-[min(34vw,62svh)] leading-none whitespace-nowrap text-ink/[0.07]"
           >
             {t.backdrop}
           </motion.p>
@@ -231,7 +232,7 @@ export function Turntable({ frames, first, alt, labels: t }: Props) {
                     {String(i + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {note.side}
                   </span>
                   <h3 className="title mt-2 text-[clamp(1.5rem,min(3vw,4.6svh),2.75rem)] lg:mt-4">{note.title}</h3>
-                  <p className="mt-2 max-w-sm leading-snug font-medium lg:mt-4 lg:text-xl">{note.body}</p>
+                  <p className="mt-2 max-w-sm leading-normal lg:mt-4 lg:text-lg">{note.body}</p>
                 </li>
               ))}
             </ol>

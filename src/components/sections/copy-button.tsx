@@ -9,7 +9,7 @@ export function CopyButton({ text, label, done }: { text: string; label: string;
     <button
       type="button"
       onClick={() => navigator.clipboard.writeText(text).then(() => setCopied(true), () => setCopied(false))}
-      className="inline-flex h-11 cursor-pointer items-center rounded-full px-4 text-sm font-semibold ring-1 ring-ink/25 ring-inset hover:ring-ink/60"
+      className="inline-flex h-11 cursor-pointer items-center rounded-full px-4 text-sm font-semibold ring-1 ring-ink/30 ring-inset hover:ring-ink/60"
     >
       <span aria-live="polite">{copied ? done : label}</span>
     </button>

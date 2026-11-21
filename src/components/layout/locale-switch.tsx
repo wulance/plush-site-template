@@ -20,7 +20,7 @@ export function LocaleSwitch({ locale, label, className }: { locale: Locale; lab
             onClick={(event) => {
               event.currentTarget.hash = window.location.hash;
             }}
-            className={cn("grid h-11 min-w-11 place-items-center rounded-full px-2 transition-opacity", l === locale ? "font-semibold" : "opacity-65 hover:opacity-100")}
+            className={cn("grid h-11 min-w-11 place-items-center rounded-full px-2 transition-colors", l === locale ? "font-semibold" : "text-ink-soft hover:text-ink")}
           >
             {localeLabels[l]}
           </a>

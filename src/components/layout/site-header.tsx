@@ -21,8 +21,8 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
   const links = sectionLinks(dict);
 
   return (
-    <header className="sticky top-2 z-30 px-2 pt-2 md:top-3 md:px-3 md:pt-3">
-      <div className="relative mx-auto flex h-16 max-w-[85rem] items-center justify-between gap-3 rounded-full bg-stage/85 pr-2.5 pl-4 shadow-[0_14px_34px_-18px_rgb(0_0_0/0.8)] ring-1 ring-ink/10 backdrop-blur-xl md:gap-6 md:pl-6">
+    <header className="sticky top-0 z-30 border-b border-line bg-stage/95 backdrop-blur-xl">
+      <div className="shell relative flex h-18 items-center justify-between gap-3 md:h-24 md:gap-6">
         {/* The link is named by the brand it shows; it leads to the top of the page. */}
         <a href="#top" className="rounded-full">
           <Logo locale={locale} />

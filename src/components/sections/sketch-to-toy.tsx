@@ -63,10 +63,10 @@ export function SketchToToy({ designs, labels }: { designs: SketchDesign[]; labe
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerCancel={() => (press.current = null)}
-        className="stage-light relative isolate aspect-square cursor-ew-resize touch-pan-y overflow-hidden rounded-[2rem] bg-stage-deep select-none md:rounded-[2.75rem]"
+        className="stage-light relative isolate aspect-square cursor-ew-resize touch-pan-y overflow-hidden rounded-lg border border-line bg-stage-deep select-none"
       >
-        {/* The finished toy, standing in its own light. */}
-        <div aria-hidden className="stage-light absolute inset-x-0 bottom-0 h-1/2 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-55 blur-2xl" />
+        {/* The finished toy, against a tint of its own colour. */}
+        <div aria-hidden className="stage-light absolute inset-x-0 bottom-0 h-1/2 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-20 blur-2xl" />
         <img key={design.image.src} {...design.image} sizes={SIZES} alt={design.name} loading="lazy" draggable={false} className="toy absolute inset-0 size-full animate-rise object-contain p-[7%]" />
 
         {/* The drawing lies over it, up to the dividing line. */}
@@ -94,8 +94,8 @@ export function SketchToToy({ designs, labels }: { designs: SketchDesign[]; labe
           className="peer sr-only"
         />
         <div aria-hidden className="group pointer-events-none absolute inset-y-0 left-[var(--split)] w-0 peer-focus-visible:[--ring:4px]">
-          <div className="stitch-y absolute inset-y-0 -left-px text-stage" />
-          <div className="absolute top-1/2 left-0 grid size-12 -translate-1/2 place-items-center rounded-full bg-accent text-on-accent shadow-[0_0_0_var(--ring,0px)_var(--color-ink),0_0_0_calc(var(--ring,0px)*2)_var(--color-stage),0_8px_24px_-6px_rgb(0_0_0/0.6)]">
+          <div className="stitch-y absolute inset-y-0 -left-px text-ink/35" />
+          <div className="absolute top-1/2 left-0 grid size-12 -translate-1/2 place-items-center rounded-full bg-accent text-on-accent shadow-[0_0_0_var(--ring,0px)_var(--color-ink),0_0_0_calc(var(--ring,0px)*2)_var(--color-stage),0_8px_24px_-6px_rgb(0_0_0/0.16)]">
             <svg viewBox="0 0 20 20" fill="none" className="size-5">
               <path d="m7 5-4 5 4 5M13 5l4 5-4 5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -111,15 +111,15 @@ export function SketchToToy({ designs, labels }: { designs: SketchDesign[]; labe
             aria-pressed={i === index}
             onClick={() => setIndex(i)}
             className={cn(
-              "flex min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-2xl p-2 text-left ring-1 transition-colors duration-300 ring-inset max-sm:flex-col max-sm:text-center sm:gap-3 sm:pr-3",
-              i === index ? "bg-ink text-stage ring-ink" : "ring-ink/20 hover:ring-ink/60",
+              "flex min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-lg p-2 text-left ring-1 transition-colors duration-300 ring-inset max-sm:flex-col max-sm:text-center sm:gap-3 sm:pr-3",
+              i === index ? "bg-ink text-stage ring-ink" : "ring-ink/30 hover:ring-ink/60",
             )}
           >
-            <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-[#f6efdf]">
+            <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-md bg-[#f6efdf]">
               <img {...item.sketch} sizes="3rem" alt="" loading="lazy" className="size-full object-contain p-1 mix-blend-multiply" />
             </span>
             <span className="min-w-0">
-              <span className="note block opacity-70 max-sm:hidden">{item.code}</span>
+              <span className="note block max-sm:hidden">{item.code}</span>
               <span className="block text-[0.8125rem] leading-tight font-semibold sm:truncate sm:text-sm">{item.name}</span>
             </span>
           </button>
@@ -133,7 +133,7 @@ export function SketchToToy({ designs, labels }: { designs: SketchDesign[]; labe
         <ul className="mt-3 grid gap-x-6 sm:grid-cols-3">
           {design.details.map((detail) => (
             <li key={detail} className="flex gap-2.5 border-t border-line py-3 text-[0.9375rem] leading-snug font-medium">
-              <span className="mt-[0.45em] size-1.5 shrink-0 rounded-full bg-[var(--light)]" />
+              <span className="mt-[0.5em] size-1.5 shrink-0 rounded-full bg-accent/60" />
               {detail}
             </li>
           ))}

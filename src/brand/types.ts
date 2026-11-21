@@ -12,13 +12,13 @@ export interface Product {
   image: string;
   /** Optional design drawing with the same framing as `image`; products that have one appear in the sketch-to-toy section. */
   sketch?: string;
-  /** The colour of the light this toy stands in. */
+  /** The colour this toy is shown against, used as a faint tint behind it. */
   light: string;
   heightCm: number;
   material: Localized;
   /** Two or three short selling points. */
   details: Localized[];
-  /** Whether the toy stands in the lineup on the first screen. When no product sets it, all of them do. */
+  /** Whether the toy is shown on the sample sheet of the first screen. When no product sets it, all of them do. */
   onStage?: boolean;
   /** Minimum order for this design, in pieces. Without it, `facts.moq` is shown. */
   moq?: number;
@@ -44,16 +44,16 @@ export interface BrandConfig {
   /** A square logo mark under public/. Leave empty to use the first letter of the name. */
   logo: string;
   colors: {
-    /** The unlit stage. */
+    /** The page: paper in a light palette, the unlit floor in a dark one. */
     stage: string;
-    /** Panels on the stage. */
+    /** Panels and cards on the page. */
     stageDeep: string;
-    /** Text and light. */
+    /** Text. `inkSoft` is for secondary text and must still read on `stage`, `stageDeep` and `cool` (4.5:1). */
     ink: string;
     inkSoft: string;
-    /** The one brand colour: buttons, emphasis, the turntable panel. Text on it turns dark or light by itself. */
+    /** The one brand colour: buttons and emphasis. Text on it turns dark or light by itself. */
     accent: string;
-    /** Two supporting colours for lit panels. */
+    /** Two tints for bands and panels: the marquee and labels, the turntable and the process panel. */
     warm: string;
     cool: string;
   };

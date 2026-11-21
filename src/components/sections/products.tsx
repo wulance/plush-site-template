@@ -41,7 +41,7 @@ export function Products({ locale, dict }: { locale: Locale; dict: Dictionary })
           <p className="eyebrow mb-4">{t.eyebrow}</p>
           <h2 className="display text-[clamp(2.5rem,6vw,5rem)] whitespace-pre-line">{t.title}</h2>
         </div>
-        <p className="max-w-md text-lg leading-snug font-medium text-ink/85 lg:col-span-5 lg:justify-self-end">{t.lead}</p>
+        <p className="max-w-md text-lg leading-relaxed text-ink-soft lg:col-span-5 lg:justify-self-end">{t.lead}</p>
       </div>
       <ProductGrid
         products={products}

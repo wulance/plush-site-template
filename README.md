@@ -7,7 +7,7 @@ modelled and rendered by a script in this repository.
 
 ## What is on the page
 
-1. **Stage**: a dark stage with a spotlit line-up of toys the visitor steps through.
+1. **Studio**: an editorial introduction and a pattern-paper sample sheet the visitor steps through.
 2. **Turntable**: one toy that turns through 360° as the page scrolls or as it is dragged, with a note for each side.
 3. **Sketch to toy**: a divider dragged across a design drawing and the finished toy, and one order followed from brief to shipment.
 4. **Range**: product cards with a category filter; a card opens the design's sheet and its other pictures.
@@ -34,14 +34,14 @@ Work down this list; nothing else names the company.
    | --- | --- |
    | `name`, `legalName`, `descriptor` | Company name in the header, footer, page title and copy (English and Chinese) |
    | `logo` | The mark in the header and the browser tab |
-   | `colors` | Stage, text and accent colours of the whole site. Text on the accent colour turns dark or light by itself to stay readable |
+   | `colors` | Page, text, accent and tint colours of the whole site. Text on the accent colour turns dark or light by itself to stay readable |
    | `contact` | Email, phone, WhatsApp, WeChat ID and QR code, address and hours |
    | `facts` | Founding year, head count, capacity, minimum order, lead times, test standards (each with an optional report file) |
    | `terms` | Trade terms, port, payment, sample fee, packaging, inspection: any rows, in any order |
    | `proof` | Factory photos and client names. Empty lists hide the section |
    | `caseStudy` | One order told in pictures, under the sketch-to-toy slider. Leave it out to hide it |
    | `legal`, `socials` | Registration line, policy links and social links in the footer |
-   | `categories`, `products` | The line-up on the stage, the range and its filter, the sketch-to-toy designs. A product can carry its own `moq`, `leadDays`, `age` and extra `views` |
+   | `categories`, `products` | The samples on the first screen, the range and its filter, the sketch-to-toy designs. A product can carry its own `moq`, `leadDays`, `age` and extra `views` |
    | `turntable` | The folder of turning frames, how many there are, and which product they show. Leave it out to hide the section |
    | `shareImage` | The 1200 × 630 picture shown when the site is linked in a chat or on social media |
 

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/fraunces/full.css";
+import "@fontsource-variable/fraunces/opsz.css";
+import "@fontsource-variable/fraunces/opsz-italic.css";
 import "@fontsource-variable/instrument-sans";
 import "./globals.css";
 import brand from "@brand";

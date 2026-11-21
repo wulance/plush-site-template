@@ -177,11 +177,11 @@ export function InquiryForm({ endpoint, email, products, labels }: Props) {
       </div>
 
       {status === "mail" && (
-        <div role="status" className="grid gap-3 rounded-2xl border border-line p-4 sm:col-span-2">
+        <div role="status" className="grid gap-3 rounded-md border border-line bg-stage p-4 sm:col-span-2">
           <p className="leading-snug">
             {labels.mail} <a href={"mailto:" + email} className="font-semibold underline underline-offset-4">{email}</a>
           </p>
-          <pre className="max-h-40 overflow-auto rounded-xl bg-ink/[0.06] p-3 font-sans text-sm whitespace-pre-wrap text-ink/85">{letter}</pre>
+          <pre className="max-h-40 overflow-auto rounded-sm bg-ink/[0.06] p-3 font-sans text-sm whitespace-pre-wrap text-ink">{letter}</pre>
           <button type="button" onClick={copy} className={buttonClass("ghost", "md", "justify-self-start")}>
             {copied ? labels.copied : labels.copy}
           </button>
@@ -193,7 +193,7 @@ export function InquiryForm({ endpoint, email, products, labels }: Props) {
 
 function FieldError({ id, text }: { id: string; text?: string }) {
   return text ? (
-    <span id={id} className="text-sm font-medium text-warm">
+    <span id={id} className="text-sm font-semibold text-accent">
       {text}
     </span>
   ) : null;

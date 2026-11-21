@@ -26,7 +26,7 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
         <div className="reveal lg:col-span-5">
           <p className="eyebrow mb-4">{t.eyebrow}</p>
           <h2 className="display text-[clamp(2.5rem,5vw,4.25rem)] whitespace-pre-line">{t.title}</h2>
-          <p className="mt-6 max-w-md text-lg leading-snug font-medium text-ink/85">{t.lead}</p>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">{t.lead}</p>
 
           <dl className="mt-10">
             {details.map((detail) => (
@@ -47,13 +47,13 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
           </dl>
           {c.wechatQr && (
             <figure className="mt-6 flex items-center gap-4">
-              <img {...picture(c.wechatQr)} alt={t.qr} loading="lazy" className="size-28 rounded-2xl bg-white p-2" />
+              <img {...picture(c.wechatQr)} alt={t.qr} loading="lazy" className="size-28 rounded-md border border-line bg-white p-2" />
               <figcaption className="text-sm text-ink-soft">{t.qr}</figcaption>
             </figure>
           )}
         </div>
 
-        <div className="reveal rounded-[2rem] bg-stage-deep p-6 md:rounded-[2.75rem] md:p-10 lg:col-span-7">
+        <div className="reveal rounded-lg border border-line bg-stage-deep/55 p-6 md:p-10 lg:col-span-7">
           <InquiryForm
             endpoint={brand.inquiryEndpoint}
             email={c.email}

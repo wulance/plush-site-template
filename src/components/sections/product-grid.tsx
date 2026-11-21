@@ -31,7 +31,7 @@ interface Props {
 const HASH = "#p-";
 
 /**
- * The range as cards, each toy in a light of its own colour, with a filter by category. A card opens
+ * The range as cards, each toy against a tint of its own colour, with a filter by category. A card opens
  * the design's detail view: its other pictures and its full sheet. The view has an address of its own
  * (#p-<id>), so a buyer can send a colleague straight to one design.
  */
@@ -80,7 +80,7 @@ export function ProductGrid({ products, categories, labels }: Props) {
             onClick={() => setCategory(item.id)}
             className={cn(
               "h-11 cursor-pointer rounded-full px-4 text-[0.9375rem] font-medium ring-1 transition-colors duration-300 ring-inset",
-              category === item.id ? "bg-ink text-stage ring-ink" : "ring-ink/20 hover:ring-ink/60",
+              category === item.id ? "bg-ink text-stage ring-ink" : "ring-ink/30 hover:ring-ink/60",
             )}
           >
             {item.name}
@@ -88,17 +88,17 @@ export function ProductGrid({ products, categories, labels }: Props) {
         ))}
       </div>
 
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((product) => (
           <li
             key={product.id}
             style={{ "--light": product.light } as CSSProperties}
-            className="group relative isolate flex animate-rise flex-col overflow-hidden rounded-card bg-stage-deep"
+            className="catalog-card group relative isolate flex animate-rise flex-col overflow-hidden rounded-card"
           >
-            <div className="relative aspect-[4/3.6]">
+            <div className="catalog-image relative m-2 aspect-[4/3.6] overflow-hidden rounded-sm">
               <div
                 aria-hidden
-                className="absolute inset-x-0 bottom-0 h-2/3 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-40 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
+                className="absolute inset-x-0 bottom-0 h-1/2 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-15 blur-2xl"
               />
               <img
                 {...product.image}
@@ -107,12 +107,12 @@ export function ProductGrid({ products, categories, labels }: Props) {
                 loading="lazy"
                 className="toy absolute inset-0 size-full object-contain object-bottom px-8 pt-8 transition-transform duration-700 ease-plush group-hover:scale-[1.06]"
               />
-              <span className="note absolute top-5 left-5 text-[color:var(--light)]">{product.code}</span>
+              <span className="note absolute top-4 left-4 text-ink-soft">{product.code}</span>
               {product.views.length > 0 && (
-                <span className="absolute top-4 right-4 rounded-full bg-stage/70 px-2.5 py-1 text-xs font-semibold tabular-nums">+{product.views.length}</span>
+                <span className="absolute top-3 right-3 rounded-full bg-stage/85 px-2.5 py-1 text-xs font-semibold tabular-nums">+{product.views.length}</span>
               )}
             </div>
-            <div className="flex flex-1 flex-col p-6 pt-5">
+            <div className="flex flex-1 flex-col p-6 pt-4">
               <h3 className="title text-2xl">
                 {/* The whole card opens the detail view; the quote link sits above it. */}
                 <button type="button" onClick={() => show(product)} className="cursor-pointer text-left after:absolute after:inset-0">
@@ -151,13 +151,13 @@ export function ProductGrid({ products, categories, labels }: Props) {
         onClick={(event) => event.target === dialog.current && close()}
         aria-labelledby="product-title"
         style={{ "--light": open?.light } as CSSProperties}
-        className="m-auto max-h-[calc(100dvh-1.5rem)] w-[min(100vw-1.5rem,64rem)] overflow-y-auto rounded-[2rem] bg-stage-deep text-ink shadow-2xl ring-1 ring-ink/10 backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+        className="m-auto max-h-[calc(100dvh-1.5rem)] w-[min(100vw-1.5rem,64rem)] overflow-y-auto rounded-lg bg-stage text-ink shadow-2xl ring-1 ring-ink/10 backdrop:bg-ink/55 backdrop:backdrop-blur-sm"
       >
         {open && (
           <div className="grid md:grid-cols-2">
             <div className="p-4">
-              <div className="relative isolate aspect-square overflow-hidden rounded-3xl bg-stage">
-                <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-2/3 translate-y-1/3 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-50 blur-2xl" />
+              <div className="catalog-image relative isolate aspect-square overflow-hidden rounded-md">
+                <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--light),transparent_70%)] opacity-15 blur-2xl" />
                 <img
                   key={pictures[view].image.src}
                   {...pictures[view].image}
@@ -177,7 +177,7 @@ export function ProductGrid({ products, categories, labels }: Props) {
                         aria-label={item.caption}
                         aria-pressed={i === view}
                         onClick={() => setView(i)}
-                        className={cn("size-16 cursor-pointer overflow-hidden rounded-xl bg-stage ring-2 ring-inset", i === view ? "ring-ink" : "ring-transparent hover:ring-ink/40")}
+                        className={cn("catalog-image size-16 cursor-pointer overflow-hidden rounded-md ring-2 ring-inset", i === view ? "ring-accent" : "ring-transparent hover:ring-ink/40")}
                       >
                         <img {...item.image} sizes="4rem" alt="" loading="lazy" className="size-full object-contain p-1.5" />
                       </button>
@@ -188,12 +188,12 @@ export function ProductGrid({ products, categories, labels }: Props) {
             </div>
             <div className="flex flex-col p-6 md:p-8 md:pl-4">
               <div className="flex items-start justify-between gap-4">
-                <p className="note pt-3 text-[color:var(--light)]">{open.code}</p>
+                <p className="note pt-3 text-ink-soft">{open.code}</p>
                 <button
                   type="button"
                   onClick={close}
                   aria-label={labels.close}
-                  className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full ring-1 ring-ink/25 ring-inset hover:bg-ink hover:text-stage"
+                  className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full ring-1 ring-ink/30 ring-inset hover:bg-ink hover:text-stage"
                 >
                   <svg viewBox="0 0 20 20" fill="none" aria-hidden className="size-5">
                     <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
@@ -206,7 +206,7 @@ export function ProductGrid({ products, categories, labels }: Props) {
               <ul className="mt-5 grid gap-2">
                 {open.details.map((detail) => (
                   <li key={detail} className="flex gap-2.5 leading-snug font-medium">
-                    <span className="mt-[0.5em] size-1.5 shrink-0 rounded-full bg-[var(--light)]" />
+                    <span className="mt-[0.55em] size-1.5 shrink-0 rounded-full bg-accent/60" />
                     {detail}
                   </li>
                 ))}
