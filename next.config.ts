@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
   images: { unoptimized: true },
+  // One branded page for every address the site does not have: src/app/global-not-found.tsx.
+  experimental: { globalNotFound: true },
 };
 
 export default nextConfig;

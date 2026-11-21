@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useState, type CSSProperties } from "react";
+import { motion } from "motion/react";
+import { useState, type CSSProperties } from "react";
 import { Arrow } from "@/components/ui/arrow";
 import { useInquiry } from "@/components/inquiry-context";
+import type { Pic } from "@/brand/picture";
 import { cn } from "@/lib/cn";
 
 export interface StageItem {
@@ -13,10 +14,11 @@ export interface StageItem {
   category: string;
   details: string[];
   light: string;
-  image: string;
+  image: Pic;
 }
 
 interface Labels {
+  lineup: string;
   prev: string;
   next: string;
   view: string;
@@ -31,37 +33,33 @@ const places = [
   { scale: 0.24, lift: -18, light: 0.2, opacity: 0 },
 ];
 
-const AUTOPLAY_MS = 4200;
+/** How wide a toy is drawn, the one in the light and the ones standing back, so the browser fetches a copy no larger than it needs. */
+const LIT_SIZES = "(min-width: 48rem) 24vw, 46vw";
+const BACK_SIZES = "(min-width: 48rem) 9vw, 18vw";
 
 /**
  * A dark stage with one spotlight. The designs stand in a row; the one in the light is shown full size
- * in a light of its own colour, and can be squeezed. The row advances by itself until someone takes over.
+ * in a light of its own colour, and can be squeezed. The row moves only when the visitor moves it:
+ * with the arrows, or by picking a toy standing further back.
  */
 export function HeroStage({ items, labels }: { items: StageItem[]; labels: Labels }) {
   const [active, setActive] = useState(0);
-  const [auto, setAuto] = useState(true);
-  const still = useReducedMotion();
   const { setProduct } = useInquiry();
   const count = items.length;
   const half = Math.floor(count / 2);
   const current = items[active];
-
-  useEffect(() => {
-    if (!auto || still) return;
-    const timer = setInterval(() => setActive((i) => (i + 1) % count), AUTOPLAY_MS);
-    return () => clearInterval(timer);
-  }, [auto, still, count]);
-
-  const show = (index: number) => {
-    setAuto(false);
-    setActive((index + count) % count);
-  };
+  const show = (index: number) => setActive((index + count) % count);
 
   return (
     <div
+      role="group"
+      aria-roledescription="carousel"
+      aria-label={labels.lineup}
       className="relative z-10 flex min-h-[25rem] flex-1 flex-col [--step:54vw] sm:[--step:34vw] md:min-h-[21rem] lg:[--step:23vw]"
       style={{ "--light": current.light } as CSSProperties}
     >
+      {/* The first toy is the largest thing on the opening screen, so its picture is asked for before the scripts. */}
+      <link rel="preload" as="image" href={items[0].image.src} imageSrcSet={items[0].image.srcSet} imageSizes={LIT_SIZES} fetchPriority="high" />
       <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-[45%] bottom-28 md:bottom-32">
         {/* The beam, the floor it lands on, and the pool of coloured light under the toy. */}
         <div className="absolute inset-y-0 left-1/2 w-[min(150vw,72rem)] -translate-x-1/2 blur-3xl">
@@ -79,32 +77,35 @@ export function HeroStage({ items, labels }: { items: StageItem[]; labels: Label
           return (
             <li
               key={item.id}
-              aria-hidden={!place.opacity}
-              className="absolute inset-y-0 left-1/2 flex w-0 origin-bottom justify-center transition-[transform,opacity,filter] duration-[900ms] ease-plush will-change-transform"
+              // The toys standing back are a pointer shortcut; the arrows below do the same for keyboards and screen readers.
+              aria-hidden={!lit}
+              className="absolute inset-y-0 left-1/2 flex w-0 origin-bottom justify-center transition-[transform,opacity,filter] duration-[900ms] ease-plush will-change-transform motion-reduce:transition-none"
               style={{
                 transform: `translate(calc(var(--step) * ${offset}), ${place.lift}%) scale(${place.scale})`,
                 opacity: place.opacity,
                 filter: `brightness(${place.light})`,
                 zIndex: count - Math.abs(offset),
+                visibility: place.opacity ? undefined : "hidden",
               }}
             >
               <motion.button
                 type="button"
-                tabIndex={place.opacity ? 0 : -1}
-                aria-label={lit ? labels.squeeze + ": " + item.name : item.name}
-                aria-current={lit}
+                tabIndex={lit ? 0 : -1}
+                aria-label={labels.squeeze + ": " + item.name}
                 onClick={() => show(i)}
                 whileHover={lit ? { scaleX: 1.03, scaleY: 0.98 } : { y: "-3%" }}
                 whileTap={lit ? { scaleX: 1.14, scaleY: 0.82 } : undefined}
                 transition={{ type: "spring", stiffness: 420, damping: 15 }}
                 style={{ transformOrigin: "50% 100%" }}
-                className="h-full shrink-0 cursor-pointer touch-manipulation select-none"
+                className="h-full shrink-0 cursor-pointer touch-manipulation rounded-3xl select-none"
               >
                 <img
-                  src={item.image}
+                  {...item.image}
+                  sizes={lit ? LIT_SIZES : BACK_SIZES}
                   alt=""
                   draggable={false}
-                  fetchPriority={i === 0 ? "high" : undefined}
+                  decoding="async"
+                  fetchPriority={i === 0 ? "high" : "low"}
                   className="toy h-full w-auto max-w-[min(86vw,46rem)] object-contain object-bottom"
                 />
               </motion.button>
@@ -120,8 +121,8 @@ export function HeroStage({ items, labels }: { items: StageItem[]; labels: Label
             {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")} · {current.code}
             <span className="max-sm:hidden"> · {current.category}</span>
           </p>
-          <p className="display mt-2 text-[clamp(1.75rem,min(4.2vw,6svh),3.5rem)]">{current.name}</p>
-          <ul className="note mt-2.5 flex flex-wrap justify-center gap-x-4 gap-y-1 text-ink/70">
+          <p className="title mt-2 text-[clamp(1.625rem,min(3.4vw,5svh),2.75rem)]">{current.name}</p>
+          <ul className="mt-2.5 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm text-ink/75">
             {current.details.map((detail) => (
               <li key={detail} className="flex items-center gap-1.5">
                 <span className="size-1 rounded-full bg-[var(--light)]" />
@@ -130,9 +131,9 @@ export function HeroStage({ items, labels }: { items: StageItem[]; labels: Label
             ))}
           </ul>
           <a
-            href="#contact"
+            href="#inquiry"
             onClick={() => setProduct(current.id)}
-            className="note mt-3 inline-flex items-center gap-1.5 text-ink underline-offset-4 hover:underline"
+            className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold text-ink underline decoration-ink/30 underline-offset-4 hover:decoration-ink"
           >
             {labels.view}
             <Arrow className="size-3" />
@@ -150,7 +151,7 @@ function StepButton({ label, onClick, flip }: { label: string; onClick: () => vo
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full ring-1 ring-ink/25 transition-colors duration-300 ring-inset hover:bg-ink hover:text-stage md:size-12"
+      className="grid size-12 shrink-0 cursor-pointer place-items-center rounded-full ring-1 ring-ink/25 transition-colors duration-300 ring-inset hover:bg-ink hover:text-stage"
     >
       <Arrow className={cn(flip && "-scale-x-100")} />
     </button>

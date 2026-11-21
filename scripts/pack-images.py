@@ -7,7 +7,7 @@
 
    python3 scripts/pack-images.py turntable <folder of 00.png, 01.png, ...>
        Crops every frame of a turn to one shared box and writes public/images/turntable/NN.webp.
-       Prints the frame size to put in brand.config.ts.
+       Any number of frames works; put the count in brand.config.ts.
 """
 import glob, os, sys
 import numpy as np

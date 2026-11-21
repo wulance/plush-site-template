@@ -1,13 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import type { CSSProperties } from "react";
 import "@fontsource-variable/fraunces/full.css";
-import "@fontsource-variable/fraunces/full-italic.css";
 import "@fontsource-variable/instrument-sans";
 import "@fontsource/dm-mono/latin-400.css";
 import "@fontsource/dm-mono/latin-500.css";
 import "../globals.css";
 import brand from "@brand";
+import { palette } from "@/brand/palette";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { htmlLang, isLocale, locales } from "@/i18n/config";
@@ -27,27 +26,21 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
   const title = brand.name[locale] + " — " + dict.meta.title;
+  // A share picture has to be given as a full address, so it waits for the published address too.
+  const images = brand.shareImage && brand.siteUrl ? [{ url: asset(brand.shareImage), width: 1200, height: 630 }] : undefined;
   return {
-    metadataBase: new URL(brand.siteUrl),
+    // Without the published address, tags that need a full address are left out rather than pointed at a guess.
+    metadataBase: brand.siteUrl ? new URL(brand.siteUrl) : undefined,
     title,
     description: dict.meta.description,
     icons: brand.logo ? { icon: asset(brand.logo) } : undefined,
-    alternates: { languages: Object.fromEntries(locales.map((l) => [htmlLang[l], "/" + l + "/"])) },
-    openGraph: { title, description: dict.meta.description, locale: htmlLang[locale], type: "website" },
+    alternates: brand.siteUrl
+      ? { canonical: "/" + locale + "/", languages: Object.fromEntries(locales.map((l) => [htmlLang[l], "/" + l + "/"])) }
+      : undefined,
+    openGraph: { title, description: dict.meta.description, locale: htmlLang[locale], type: "website", siteName: brand.name[locale], images },
+    twitter: { card: images ? "summary_large_image" : "summary", title, description: dict.meta.description, images },
   };
 }
-
-/** The brand's colours, set over the defaults in globals.css. */
-const palette = {
-  "--color-stage": brand.colors.stage,
-  "--color-stage-deep": brand.colors.stageDeep,
-  "--color-ink": brand.colors.ink,
-  "--color-ink-soft": brand.colors.inkSoft,
-  "--color-accent": brand.colors.accent,
-  "--color-accent-deep": brand.colors.accentDeep,
-  "--color-warm": brand.colors.warm,
-  "--color-cool": brand.colors.cool,
-} as CSSProperties;
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Params }) {
   const { locale } = await params;
@@ -57,8 +50,11 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={htmlLang[locale]} style={palette}>
       <body className="flex min-h-dvh flex-col">
+        <a href="#main" className="sr-only z-50 rounded-full bg-ink px-5 py-3 font-medium text-stage focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
+          {dict.skip}
+        </a>
         <SiteHeader locale={locale} dict={dict} />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <SiteFooter locale={locale} dict={dict} />
       </body>
     </html>

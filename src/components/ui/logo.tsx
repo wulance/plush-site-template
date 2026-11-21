@@ -10,13 +10,13 @@ export function Logo({ locale }: { locale: Locale }) {
       {brand.logo ? (
         <img src={asset(brand.logo)} alt="" width={36} height={36} className="size-9" />
       ) : (
-        <span aria-hidden className="display grid size-9 place-items-center rounded-full bg-accent text-lg text-white">
+        <span aria-hidden className="display grid size-9 place-items-center rounded-full bg-accent text-lg text-on-accent">
           {Array.from(name)[0]}
         </span>
       )}
       <span className="flex flex-col leading-none">
         <span className="display text-[1.375rem]">{name}</span>
-        <span className="note mt-1 text-[0.5625rem] text-ink-soft">{brand.descriptor[locale]}</span>
+        <span className="mt-1 text-[0.6875rem] font-medium tracking-wide text-ink-soft">{brand.descriptor[locale]}</span>
       </span>
     </span>
   );

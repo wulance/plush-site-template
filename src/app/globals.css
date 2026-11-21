@@ -8,7 +8,9 @@
   --color-ink: #f7eedd;
   --color-ink-soft: #a79c90;
   --color-accent: #ff4a1c;
-  --color-accent-deep: #e03a10;
+  /* Text on the accent colour and the accent under the pointer; the layout works both out from the accent. */
+  --color-on-accent: #0d0b0a;
+  --color-accent-hover: #ff6238;
   --color-warm: #ffd046;
   --color-cool: #a9d8f5;
   --color-line: color-mix(in srgb, var(--color-ink) 16%, transparent);
@@ -45,7 +47,7 @@
 @property --light {
   syntax: "<color>";
   inherits: true;
-  initial-value: #ff4a1c;
+  initial-value: #808080;
 }
 
 @layer base {
@@ -67,17 +69,18 @@
   }
   ::selection {
     background: var(--color-accent);
-    color: var(--color-stage);
+    color: var(--color-on-accent);
   }
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--focus, var(--color-accent));
     outline-offset: 3px;
     border-radius: 4px;
   }
 }
 
 @layer components {
-  /* Display type: Fraunces at its heaviest and softest, so the letters look stuffed. */
+  /* Display type: Fraunces at its heaviest and softest, so the letters look stuffed. Kept for the
+     headline of each section and for numerals; names and labels are set in the text face. */
   .display {
     font-family: var(--font-display);
     font-weight: 900;
@@ -88,43 +91,48 @@
     white-space: pre-line;
   }
   .display em {
-    font-style: italic;
-    font-weight: 900;
+    font-style: normal;
     color: var(--em, var(--color-accent));
+  }
+  /* A name or a step: the text face, heavy and tight. */
+  .title {
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  :lang(zh-CN) .title {
+    letter-spacing: 0;
+    line-height: 1.25;
   }
   /* Chinese display type is a heavy gothic: no italics, looser leading, no negative tracking. */
   :lang(zh-CN) .display {
     letter-spacing: 0;
     line-height: 1.14;
   }
-  :lang(zh-CN) .display em {
-    font-style: normal;
-  }
 
   /* Spec-sheet annotations: small, monospaced, upper case. */
   .note {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  :lang(zh-CN) .note {
     font-size: 0.75rem;
-    letter-spacing: 0.14em;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-ink-soft);
   }
-  :lang(zh-CN) .eyebrow {
-    letter-spacing: 0.2em;
-    font-size: 0.75rem;
+  /* Chinese has no capitals to space out and no monospace: annotations are set in the text face. */
+  :lang(zh-CN) :is(.note, .eyebrow) {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
   }
 
   .shell {
@@ -140,13 +148,21 @@
     .shell { padding-inline: 3rem; }
   }
 
+  /* A form or spec label: sentence case, readable at arm's length. */
+  .label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+  }
+
   .field {
     width: 100%;
     border-radius: 0.875rem;
     border: 1px solid var(--color-line);
     background: color-mix(in srgb, var(--color-ink) 7%, transparent);
     padding: 0.8rem 1rem;
-    font-size: 0.9375rem;
+    /* 16px keeps iOS from zooming the page when a field takes focus. */
+    font-size: 1rem;
     color: var(--color-ink);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
@@ -157,9 +173,22 @@
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cool) 30%, transparent);
   }
   select.field option { color: #111; }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-warm);
+  }
 }
 
 @layer utilities {
+  /* The accent as a surface: what stands on it takes the colour that reads on it. */
+  .on-accent {
+    --color-ink: var(--color-on-accent);
+    --color-ink-soft: color-mix(in srgb, var(--color-on-accent) 84%, transparent);
+    --color-line: color-mix(in srgb, var(--color-on-accent) 22%, transparent);
+    --focus: var(--color-on-accent);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
   /* A cut-out toy standing on the page: a soft contact shadow, no outline. */
   .toy {
     filter: drop-shadow(0 1.1rem 1rem rgb(0 0 0 / 0.5));

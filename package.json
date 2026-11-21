@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "images": "node scripts/images.mjs",
+    "predev": "node scripts/images.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/images.mjs --strict",
     "build": "next build",
     "preview": "npx serve out",
     "lint": "eslint",
+    "pretypecheck": "node scripts/images.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -27,6 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.29",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -3,13 +3,13 @@ import { cn } from "@/lib/cn";
 import { Arrow } from "./arrow";
 
 const variants = {
-  primary: "bg-accent text-white hover:bg-accent-deep",
+  primary: "bg-accent text-on-accent hover:bg-accent-hover",
   ink: "bg-ink text-stage hover:bg-ink/85",
   ghost: "text-ink ring-1 ring-inset ring-ink/25 hover:ring-ink/60",
 };
 
 const sizes = {
-  md: "h-11 px-5 text-sm",
+  md: "h-11 px-5 text-[0.9375rem]",
   lg: "h-14 px-7 text-base",
 };
 
