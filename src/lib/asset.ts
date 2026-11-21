@@ -1,6 +1,9 @@
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-/** The address of a file under public/, wherever the site is hosted. A full address (https://…, mailto:…) is kept as it is. */
+/**
+ * The address of a file under public/ (a path starting with "/"), wherever the site is hosted.
+ * Anything else is kept as it is: a full address (https://…, mailto:…), a part of the page (#contact), a relative path.
+ */
 export function asset(path: string) {
-  return /^([a-z][a-z\d+.-]*:|\/\/)/i.test(path) ? path : basePath + path;
+  return path.startsWith("/") && !path.startsWith("//") ? basePath + path : path;
 }
